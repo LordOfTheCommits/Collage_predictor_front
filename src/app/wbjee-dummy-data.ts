@@ -30,5 +30,5 @@ export const DUMMY_WBJEE_DATA: WbjeeDto[] = [
   { srNo: '27', round: '1', institute: 'Institute 27', course: 'B.Tech', stream: 'ME', seatType: 'ST', quota: 'Other', category: 'ST', openingRank: '2700', closingRank: '3100' },
   { srNo: '28', round: '2', institute: 'Institute 28', course: 'B.Sc', stream: 'Math', seatType: 'General', quota: 'Home', category: 'Open', openingRank: '2800', closingRank: '3200' },
   { srNo: '29', round: '1', institute: 'Institute 29', course: 'B.Tech', stream: 'CSE', seatType: 'OBC', quota: 'Other', category: 'OBC', openingRank: '2900', closingRank: '3300' },
-  { srNo: '30', round: '2', institute: 'Institute 30', course: 'B.Tech', stream: 'ECE', seatType: 'SC', quota: 'Home', category: 'SC', openingRank: '3000', closingRank: '3400' },
+  { srNo: '30', round: '2', institute: 'Institute 30', course: 'B.Tech', stream: 'ECE', seatType: 'SC', quota: 'Home', category: 'SC', openingRank: '3000', closingRank: '3400' }
 ];

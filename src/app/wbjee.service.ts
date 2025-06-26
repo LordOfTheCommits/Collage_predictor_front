@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { WbjeeDto } from './wbjee-dto.model';
+import { environment } from '../environments/environment'; // Adjust the path as necessary
 
 @Injectable({ providedIn: 'root' })
 export class WbjeeService {
   constructor(private http: HttpClient) {}
 
   getWbjeeData(round?: string, maxClosingRank?: number | null, seatType?: string, course?: string, year?: string): Observable<WbjeeDto[]> {
-    let url = 'http://localhost:8080/api/wbjee/predict';
+    let url = environment.apiBaseUrl;
     const params: string[] = [];
     console.log('[WbjeeService] Called getWbjeeData with:', { round, maxClosingRank, seatType, course, year, typeOfMaxClosingRank: typeof maxClosingRank });
     // Add round if present and not empty
