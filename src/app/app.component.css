@@ -1,0 +1,291 @@
+:host {
+  --bright-blue: oklch(51.01% 0.274 263.83);
+  --electric-violet: oklch(53.18% 0.28 296.97);
+  --french-violet: oklch(47.66% 0.246 305.88);
+  --vivid-pink: oklch(69.02% 0.277 332.77);
+  --hot-red: oklch(61.42% 0.238 15.34);
+  --orange-red: oklch(63.32% 0.24 31.68);
+  --gray-900: oklch(19.37% 0.006 300.98);
+  --gray-700: oklch(36.98% 0.014 302.71);
+  --gray-400: oklch(70.9% 0.015 304.04);
+  --red-to-pink-to-purple-vertical-gradient: linear-gradient(
+    180deg,
+    var(--orange-red) 0%,
+    var(--vivid-pink) 50%,
+    var(--electric-violet) 100%
+  );
+  --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
+    90deg,
+    var(--orange-red) 0%,
+    var(--vivid-pink) 50%,
+    var(--electric-violet) 100%
+  );
+  --pill-accent: var(--bright-blue);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body, .main {
+  min-height: unset;
+  height: unset;
+  overflow: unset;
+  box-sizing: border-box;
+}
+
+main {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem 1rem 1rem 1rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* --- REMOVE ALL TABLE CSS: result table will use result-table.css instead --- */
+
+/* Zebra striping for rows */
+.table tbody tr:nth-child(even), table tbody tr:nth-child(even) {
+  background: #f3f6fa;
+}
+
+/* --- END TABLE CSS --- */
+
+h2 {
+  text-align: center;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  font-size: 2.2rem;
+  text-shadow: 0 2px 8px rgba(79, 140, 255, 0.08);
+}
+
+nav[aria-label="Page navigation"] {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+nav[aria-label="Page navigation"] ul.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+nav[aria-label="Page navigation"] li.page-item {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.pagination {
+  margin-top: 1.5rem;
+}
+
+.page-item .page-link {
+  color: #6366f1;
+  border: none;
+  background: none;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  margin: 0 0.15rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.page-item.active .page-link,
+.page-item .page-link:focus,
+.page-item .page-link:hover {
+  background: #6366f1;
+  color: #fff;
+  outline: none;
+}
+
+.page-item.disabled .page-link {
+  color: #a0aec0;
+  background: none;
+}
+
+/* WBJEE Search Criteria Form Styling */
+.wbjee-form-container {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 6px 32px 0 rgba(60, 72, 100, 0.13);
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  margin: 2rem auto 2rem auto;
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.wbjee-form-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  background: var(--red-to-pink-to-purple-horizontal-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2.2rem;
+}
+
+.wbjee-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.wbjee-form-label {
+  font-weight: 600;
+  color: #3b3b4f;
+  margin-bottom: 0.2rem;
+  font-size: 1.08rem;
+}
+
+.wbjee-form-select, .wbjee-form-input {
+  border-radius: 0.5rem;
+  border: 1px solid #cbd5e1;
+  padding: 0.6rem 1rem;
+  font-size: 1.08rem;
+  background: #f3f6fa;
+  transition: border-color 0.2s;
+}
+.wbjee-form-select:focus, .wbjee-form-input:focus {
+  border-color: #6366f1;
+  outline: none;
+}
+
+.wbjee-form-btn {
+  margin-top: 1.2rem;
+  padding: 1.1rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  background: #ef4444; /* red by default */
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.10);
+  transition: background 0.2s, box-shadow 0.2s;
+  width: 100%;
+  letter-spacing: 1px;
+}
+.wbjee-form-btn.ready {
+  background: #22c55e !important; /* green when ready to submit */
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.10);
+}
+.wbjee-form-btn:disabled {
+  background: #ef4444 !important;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+/* Animated Background Circles */
+.animated-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.svg-lines {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0; top: 0;
+  z-index: 1;
+}
+.floating-circles {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0; top: 0;
+  z-index: 2;
+}
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.22;
+  animation: float 12s ease-in-out infinite;
+}
+.c1 {
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, #6366f1 60%, transparent 100%);
+  left: 10vw; top: 20vh;
+  animation-delay: 0s;
+}
+.c2 {
+  width: 90px; height: 90px;
+  background: radial-gradient(circle, #f472b6 60%, transparent 100%);
+  left: 70vw; top: 15vh;
+  animation-delay: 2s;
+}
+.c3 {
+  width: 70px; height: 70px;
+  background: radial-gradient(circle, #34d399 60%, transparent 100%);
+  left: 30vw; top: 70vh;
+  animation-delay: 4s;
+}
+.c4 {
+  width: 100px; height: 100px;
+  background: radial-gradient(circle, #fbbf24 60%, transparent 100%);
+  left: 80vw; top: 60vh;
+  animation-delay: 6s;
+}
+.c5 {
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, #a78bfa 60%, transparent 100%);
+  left: 20vw; top: 60vh;
+  animation-delay: 1.5s;
+}
+.c6 {
+  width: 60px; height: 60px;
+  background: radial-gradient(circle, #f87171 60%, transparent 100%);
+  left: 60vw; top: 80vh;
+  animation-delay: 3.5s;
+}
+.c7 {
+  width: 110px; height: 110px;
+  background: radial-gradient(circle, #38bdf8 60%, transparent 100%);
+  left: 50vw; top: 10vh;
+  animation-delay: 5.5s;
+}
+.c8 {
+  width: 75px; height: 75px;
+  background: radial-gradient(circle, #facc15 60%, transparent 100%);
+  left: 85vw; top: 35vh;
+  animation-delay: 7.5s;
+}
+@keyframes float {
+  0%   { transform: translateY(0) scale(1); }
+  50%  { transform: translateY(-40px) scale(1.08); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* --- END ANIMATED BACKGROUND CSS --- */
+
+.main {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem 1rem 1rem 1rem;
+  box-sizing: border-box;
+  position: relative;
+  overflow: unset;
+}
