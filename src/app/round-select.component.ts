@@ -45,7 +45,7 @@ import { FormsModule } from '@angular/forms';
             </select>
           </div>
           <div class="wbjee-form-group">
-            <label for="maxClosingRank" class="wbjee-form-label">Max Closing Rank:</label>
+            <label for="maxClosingRank" class="wbjee-form-label">Your Expected | Actual rank:</label>
             <input id="maxClosingRank" name="maxClosingRank" type="number" class="wbjee-form-input" [(ngModel)]="maxClosingRank" required min="0">
           </div>
           <div class="wbjee-form-group">
