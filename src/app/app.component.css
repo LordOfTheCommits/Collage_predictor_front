@@ -289,3 +289,22 @@ nav[aria-label="Page navigation"] li.page-item {
   position: relative;
   overflow: unset;
 }
+
+.custom-header .header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .custom-header .header-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
