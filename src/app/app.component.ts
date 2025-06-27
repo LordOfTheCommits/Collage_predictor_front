@@ -3,11 +3,12 @@ import { RouterOutlet, ActivatedRoute } from '@angular/router';
 import { WbjeeService } from './wbjee.service';
 import { WbjeeDto } from './wbjee-dto.model';
 import { NgIf, NgFor } from '@angular/common';
+import { FooterComponent } from './footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf, NgFor],
+  imports: [RouterOutlet, NgIf, NgFor, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

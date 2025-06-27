@@ -335,6 +335,90 @@ h2 {
   100% { transform: translateY(0); }
 }
 
+.custom-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  margin: 1.5rem 0;
+}
+.custom-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+.custom-spinner .dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 60%, #f472b6 100%);
+  opacity: 0.8;
+  animation: dot-bounce 1.2s infinite ease-in-out;
+}
+.custom-spinner .dot1 { animation-delay: 0s; }
+.custom-spinner .dot2 { animation-delay: 0.2s; }
+.custom-spinner .dot3 { animation-delay: 0.4s; }
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: scale(0.8); opacity: 0.7; }
+  40% { transform: scale(1.2); opacity: 1; }
+}
+.spinner-text {
+  color: #6366f1;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.custom-header {
+  width: 100vw;
+  background: linear-gradient(90deg, #38bdf8 0%, #6366f1 100%);
+  color: #fff;
+  padding: 1.7rem 0 1.1rem 0;
+  box-shadow: 0 4px 24px 0 rgba(99,102,241,0.10);
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 10;
+  border-bottom-left-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+  overflow: hidden;
+}
+.header-content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.header-icon {
+  font-size: 2.7rem;
+  margin-bottom: 0.1rem;
+  filter: drop-shadow(0 2px 8px #38bdf8cc);
+}
+.header-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-shadow: 0 2px 8px rgba(60,72,100,0.10);
+}
+.header-subtitle {
+  font-size: 1.13rem;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  color: #e0f2fe;
+  text-shadow: 0 2px 8px rgba(60,72,100,0.10);
+}
+@media (max-width: 767px) {
+  .custom-header { padding: 1.1rem 0 0.5rem 0; border-bottom-left-radius: 1.2rem; border-bottom-right-radius: 1.2rem; }
+  .header-title { font-size: 1.4rem; }
+  .header-icon { font-size: 1.3rem; }
+  .header-subtitle { font-size: 0.97rem; }
+}
+
 @media (max-width: 767px) {
   .result-table,
   .table {

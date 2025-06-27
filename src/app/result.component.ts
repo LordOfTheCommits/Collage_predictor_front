@@ -3,6 +3,7 @@ import { WbjeeService } from './wbjee.service';
 import { WbjeeDto } from './wbjee-dto.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
+import Swal from 'sweetalert2';
 import './result-table.css';
 
 @Component({
@@ -10,6 +11,13 @@ import './result-table.css';
   standalone: true,
   imports: [NgFor, NgIf],
   template: `
+    <header class="custom-header">
+      <div class="header-content">
+        <span class="header-icon">🎓</span>
+        <span class="header-title">College Predictor Platform</span>
+        <span class="header-subtitle">Empowering your future, one choice at a time</span>
+      </div>
+    </header>
     <main class="main">
       <div class="animated-lights">
         <div class="light-spot light-spot1"></div>
@@ -40,11 +48,20 @@ import './result-table.css';
         <div class="cube cube8"></div>
       </div>
       <div class="bg-white bg-opacity-90 rounded-4 shadow-lg p-4 mb-4 wbjee-form-container">
-        <h2 class="result-heading">Predicted College</h2>
+        <h2 class="result-heading">Predicted College based on {{ selectedYear || '2021' }} data</h2>
         <div class="table-responsive bg-white bg-opacity-100 rounded-4 shadow p-2">
+          <div *ngIf="loading" class="custom-spinner-container">
+            <div class="custom-spinner">
+              <div class="dot dot1"></div>
+              <div class="dot dot2"></div>
+              <div class="dot dot3"></div>
+            </div>
+            <div class="spinner-text">Loading results, please wait...</div>
+          </div>
           <table *ngIf="pagedData.length > 0" class="table table-striped table-hover table-bordered align-middle text-center">
             <thead class="table-success">
               <tr>
+                <th>Best Fitted Choice</th>
                 <th>Round</th>
                 <th>Institute</th>
                 <th>Course</th>
@@ -57,7 +74,8 @@ import './result-table.css';
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let row of pagedData">
+              <tr *ngFor="let row of pagedData; let i = index">
+                <td>{{ (page - 1) * pageSize + i + 1 }}</td>
                 <td>{{ row.round }}</td>
                 <td>{{ row.institute }}</td>
                 <td>{{ row.course }}</td>
@@ -77,7 +95,7 @@ import './result-table.css';
               <span style="font-size:1rem; color:#856404;">Please select a different year or seat type.</span>
             </div>
           </ng-container>
-          <ng-container *ngIf="!(selectedSeatType === 'JEE(Main) Seats' && (selectedYear === '2021' || selectedYear === '2022')) && pagedData.length === 0">
+          <ng-container *ngIf="showNoResultsAlert && !backendError">
             <div class="alert alert-info text-center mt-4" style="font-size:1.2rem; border-radius:1rem; box-shadow:0 2px 16px 0 rgba(99,102,241,0.08); background: linear-gradient(90deg, #f8fafc 0%, #e0e7ff 100%); color: #6366f1;">
               <i class="bi bi-emoji-frown" style="font-size:2rem;"></i><br>
               No results found for your selection.<br>
@@ -115,6 +133,9 @@ export class ResultComponent {
   selectedSeatType: string = '';
   selectedCourse: string = '';
   selectedYear: string = '';
+  showNoResultsAlert = false;
+  backendError = false;
+  loading = false;
 
   constructor(private wbjeeService: WbjeeService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
@@ -134,31 +155,42 @@ export class ResultComponent {
   }
 
   fetchData() {
-    console.log('ResultComponent fetchData called with:', {
-      selectedRound: this.selectedRound,
-      maxClosingRank: this.maxClosingRank,
-      selectedSeatType: this.selectedSeatType,
-      selectedCourse: this.selectedCourse,
-      selectedYear: this.selectedYear
-    });
-    this.wbjeeService.getWbjeeData(this.selectedRound, this.maxClosingRank, this.selectedSeatType, this.selectedCourse, this.selectedYear).subscribe(data => {
-      console.log('ResultComponent received data:', data);
-      // Only apply client-side filtering if backend returns all data (i.e., if both params are not sent)
-      let filtered = data;
-      if (this.selectedRound && this.maxClosingRank !== null && this.maxClosingRank !== undefined && typeof this.maxClosingRank === 'number' && !isNaN(this.maxClosingRank)) {
-        // If both params are present, assume backend filtered, do not filter again
-        // If only one param is present, filter on the other
-      } else {
-        if (this.selectedRound) {
-          filtered = filtered.filter(row => row.round === this.selectedRound);
+    this.showNoResultsAlert = false;
+    this.backendError = false;
+    this.loading = true;
+    this.wbjeeService.getWbjeeData(this.selectedRound, this.maxClosingRank, this.selectedSeatType, this.selectedCourse, this.selectedYear).subscribe({
+      next: data => {
+        console.log('ResultComponent received data:', data);
+        let filtered = data;
+        if (this.selectedRound && this.maxClosingRank !== null && this.maxClosingRank !== undefined && typeof this.maxClosingRank === 'number' && !isNaN(this.maxClosingRank)) {
+          // If both params are present, assume backend filtered, do not filter again
+        } else {
+          if (this.selectedRound) {
+            filtered = filtered.filter(row => row.round === this.selectedRound);
+          }
+          if (typeof this.maxClosingRank === 'number' && !isNaN(this.maxClosingRank)) {
+            filtered = filtered.filter(row => +row.closingRank <= this.maxClosingRank!);
+          }
         }
-        if (typeof this.maxClosingRank === 'number' && !isNaN(this.maxClosingRank)) {
-          filtered = filtered.filter(row => +row.closingRank <= this.maxClosingRank!);
-        }
+        this.wbjeeDataList = filtered;
+        this.totalPages = Math.ceil(this.wbjeeDataList.length / this.pageSize);
+        this.setPage(1);
+        // Only show no results alert if backend is up and there are no results
+        this.showNoResultsAlert = this.pagedData.length === 0 && !this.backendError;
+        this.loading = false;
+      },
+      error: err => {
+        this.showNoResultsAlert = false;
+        this.backendError = true;
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops! Service Unavailable',
+          text: 'We’re having trouble connecting to the server right now. Please check your internet connection or try again in a few minutes. If the problem persists, contact support.',
+          confirmButtonColor: '#6366f1',
+          background: '#f8fafc',
+        });
       }
-      this.wbjeeDataList = filtered;
-      this.totalPages = Math.ceil(this.wbjeeDataList.length / this.pageSize);
-      this.setPage(1);
     });
   }
 
