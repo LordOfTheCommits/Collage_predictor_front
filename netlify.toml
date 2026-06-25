@@ -1,0 +1,8 @@
+ [build]
+  command = "ng build --configuration production"
+  publish = "dist/Collage_predictor_front"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
