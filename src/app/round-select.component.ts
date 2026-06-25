@@ -158,7 +158,7 @@ export class RoundSelectComponent {
     "Textile Technology"
 ];
 selectedCourse: string = '';
-  years = ['2021', '2022', '2023', '2024','2025'];
+  years = ['2021', '2022', '2023', '2024', '2025'];
   selectedYear: string = '';
 
   constructor(private router: Router) {}
