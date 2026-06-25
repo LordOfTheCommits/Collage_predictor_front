@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/Collage_predictor_front/browser/browser",
+            "outputPath": "dist/Collage_predictor_front",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [

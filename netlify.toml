@@ -1,6 +1,6 @@
 [build]
   command = "ng build --configuration production"
-  publish = "dist/Collage_predictor_front/browser/browser"
+  publish = "dist/Collage_predictor_front"
 
 [[redirects]]
   from = "/*"
